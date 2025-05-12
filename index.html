@@ -748,18 +748,19 @@
         </div>
     </nav>
     
-    <section class="hero" id="home">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h2>Tunomukumo & Salim</h2>
-            <p class="subtitle">Request the honour of your presence at their wedding</p>
-            <div class="date-box">
-                <p>Friday, 17 October 2025</p>
-            </div>
-            <div class="hero-ornament"></div>
-            <a href="#rsvp" class="btn">RSVP Now</a>
+   <section class="hero" id="home">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h2>Tunomukumo & Salim</h2>
+        <p class="subtitle">Request the honour of your presence at their wedding</p>
+        <div class="date-box">
+            <p>Friday, 17 October 2025</p>
         </div>
-    </section>
+        <div class="hero-ornament"></div>
+        <a href="#rsvp" class="btn">RSVP Now</a>
+    </div>
+</section>
+
     
     <section class="couple" id="couple">
         <div class="container">
@@ -774,8 +775,16 @@
                     </div>
                 </div>
                 <div class="story">
-                    <p>Our journey together began [brief story about how they met]. After [time period] of getting to know each other, we're excited to celebrate our love and commitment with you on this special day.</p>
-                    <p>We are blessed to share our traditions and culture as we unite our families and start our life together.</p>
+                    <p>
+                        Our beautiful journey together began in 2016, when fate intervened through a dear friend's thoughtful recommendation. 
+                        What started as casual conversations soon blossomed into deep connection as we discovered our shared values, dreams, and the kind of love that grows stronger with time. 
+                        Through nine unforgettable years filled with laughter, challenges, and countless precious moments, we've built a foundation of trust, respect, and unwavering support for one another.
+
+                    </p>
+                    <p>
+                        Now, with hearts full of gratitude and joy, we're honored to invite you to witness and celebrate this next 
+                        chapter of our love story as we formally unite our lives in marriage.
+                    </p>
                 </div>
             </div>
         </div>
@@ -988,7 +997,7 @@
             <div class="social-links">
                 <a href="mailto:salimtunomukumo@gmail.com"><i class="fa fa-envelope"></i></a>
                 
-                <a href="https://api.whatsapp.com/send?phone=264818444628&text=Can%20I%20know%20more%20about%20your%20service.." target='_blank' class="float""><i class="fab fa-whatsapp"></i></a>
+                <a href="https://api.whatsapp.com/send?phone=2648136224&text=Can%20I%20know%20more%20about%20your%20service.." target='_blank' class="float""><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
     </footer>
@@ -1112,7 +1121,7 @@
             let isValid = true;
             const form = document.getElementById('rsvpForm');
             
-            // Validate name
+            
             const name = form.querySelector('#name');
             if (name.value.trim() === '') {
                 highlightError(name, 'Please enter your name');
@@ -1121,7 +1130,7 @@
                 removeError(name);
             }
 
-            // Validate email
+           
             const email = form.querySelector('#email');
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailPattern.test(email.value)) {
@@ -1131,7 +1140,7 @@
                 removeError(email);
             }
             
-            // Validate attendance
+            
             const attendance = form.querySelector('#attendance');
             if (attendance.value === '') {
                 highlightError(attendance, 'Please indicate whether you will attend');
@@ -1140,7 +1149,7 @@
                 removeError(attendance);
             }
             
-            // Validate events
+            
             const events = form.querySelector('#events');
             if (events.value === '') {
                 highlightError(events, 'Please select which events you will attend');
@@ -1153,13 +1162,13 @@
         }
 
         function highlightError(element, message) {
-            // Remove any existing error message first
+           
             removeError(element);
             
-            // Add error class to input
+            
             element.classList.add('error-input');
             
-            // Create and insert error message
+           
             const errorMsg = document.createElement('div');
             errorMsg.className = 'error-message';
             errorMsg.innerText = message;
@@ -1167,7 +1176,7 @@
             errorMsg.style.fontSize = '0.8rem';
             errorMsg.style.marginTop = '5px';
             
-            // Insert after the input element
+            
             element.parentNode.insertBefore(errorMsg, element.nextSibling);
         }
 
