@@ -990,51 +990,47 @@
         <div class="container">
             <h2>RSVP</h2>
             <div class="rsvp-form">
-                <form id="rsvpForm" action="https://formspree.io/f/mvgawzon" method="POST">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone">
-                    </div>
-                    <div class="form-group">
-                        <label for="attendance">Will you be attending?</label>
-                        <select id="attendance" name="attendance" required>
-                            <option value="">Please select</option>
-                            <option value="yes">Yes, I will attend</option>
-                            <option value="no">No, I cannot attend</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="guests">Number of Guests (including yourself)</label>
-                        <input type="number" id="guests" name="guests" min="1" max="5" value="1">
-                    </div>
-                    <div class="form-group">
-                        <label for="events">Which events will you attend?</label>
-                        <select id="events" name="events" required>
-                            <option value="">Please select</option>
-                            <option value="all">All events</option>
-                            <option value="ceremony">Ceremony only</option>
-                            <option value="reception1">Ceremony & Reception 1</option>
-                            <option value="reception2">Ceremony & Reception 2</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message to the Couple (Optional)</label>
-                        <textarea id="message" name="message"></textarea>
-                    </div>
-                    
-                    <input type="text" name="_gotcha" style="display:none">
-                    <input type="hidden" name="_next" value="https://your-wedding-site.com/thank-you.html">
-                    
-                    <button type="submit" class="btn">Submit RSVP</button>
-                </form>
+                <form id="rsvpForm">
+  <div class="form-group">
+    <label for="name">Full Name</label>
+    <input type="text" id="from_name" name="name" required>
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" id="from_email" name="email" required>
+  </div>
+  <div class="form-group">
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" name="phone">
+  </div>
+  <div class="form-group">
+    <label for="attendance">Will you be attending?</label>
+    <select id="attendance" name="attendance" required>
+      <option value="">Please select</option>
+      <option value="yes">Yes, I will attend</option>
+      <option value="no">No, I cannot attend</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="guests">Number of Guests (including yourself)</label>
+    <input type="number" id="guests" name="guests" min="1" max="5" value="1">
+  </div>
+  <div class="form-group">
+    <label for="events">Which events will you attend?</label>
+    <select id="events" name="events" required>
+      <option value="">Please select</option>
+      <option value="all">All events</option>
+      <option value="ceremony">Ceremony only</option>
+      <option value="reception1">Ceremony & Reception 1</option>
+      <option value="reception2">Ceremony & Reception 2</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="message">Message to the Couple (Optional)</label>
+    <textarea id="message" name="message"></textarea>
+  </div>
+  <button type="submit" class="btn">Submit RSVP</button>
+</form>
             </div>
         </div>
     </section>
@@ -1049,12 +1045,19 @@
             <div class="social-links">
                 <a href="mailto:salimtunomukumo@gmail.com"><i class="fa fa-envelope"></i></a>
                 
-                <a href="#" target='_blank' class="float""><i class="fab fa-whatsapp"></i></a>
+                <a href="#" target='_blank' class="float"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
     </footer>
 
+   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
     <script>
+
+        //INITIALIZING EMAIL JS
+         (function() {
+            emailjs.init('D7usCFWwYyEZIeoic'); 
+        })();
         // FLOATING ELEMENTS 
         function createFloatingElements() {
             const elements = [];
@@ -1168,124 +1171,124 @@
         updateCountdown();
         const countdownInterval = setInterval(updateCountdown, 1000);
         
-        // RSVP FORM VALIDATION AND SUBMISSION
-        function validateForm() {
-            let isValid = true;
-            const form = document.getElementById('rsvpForm');
-            
-            
-            const name = form.querySelector('#name');
-            if (name.value.trim() === '') {
-                highlightError(name, 'Please enter your name');
-                isValid = false;
-            } else {
-                removeError(name);
-            }
+        
+        // RSVP FORM SUBMISSION 
+function validateForm() {
+  let isValid = true;
+  const form = document.getElementById('rsvpForm');
+  
+  // Name validation
+  const name = form.querySelector('#from_name');
+  if (name.value.trim() === '') {
+    highlightError(name, 'Please enter your name');
+    isValid = false;
+  } else {
+    removeError(name);
+  }
 
-           
-            const email = form.querySelector('#email');
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailPattern.test(email.value)) {
-                highlightError(email, 'Please enter a valid email address');
-                isValid = false;
-            } else {
-                removeError(email);
-            }
-            
-            
-            const attendance = form.querySelector('#attendance');
-            if (attendance.value === '') {
-                highlightError(attendance, 'Please indicate whether you will attend');
-                isValid = false;
-            } else {
-                removeError(attendance);
-            }
-            
-            
-            const events = form.querySelector('#events');
-            if (events.value === '') {
-                highlightError(events, 'Please select which events you will attend');
-                isValid = false;
-            } else {
-                removeError(events);
-            }
-            
-            return isValid;
-        }
+  // Email validation
+  const email = form.querySelector('#from_email');
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email.value)) {
+    highlightError(email, 'Please enter a valid email address');
+    isValid = false;
+  } else {
+    removeError(email);
+  }
 
-        function highlightError(element, message) {
-           
-            removeError(element);
-            
-            
-            element.classList.add('error-input');
-            
-           
-            const errorMsg = document.createElement('div');
-            errorMsg.className = 'error-message';
-            errorMsg.innerText = message;
-            errorMsg.style.color = 'red';
-            errorMsg.style.fontSize = '0.8rem';
-            errorMsg.style.marginTop = '5px';
-            
-            
-            element.parentNode.insertBefore(errorMsg, element.nextSibling);
-        }
+  // Attendance validation
+  const attendance = form.querySelector('#attendance');
+  if (attendance.value === '') {
+    highlightError(attendance, 'Please indicate whether you will attend');
+    isValid = false;
+  } else {
+    removeError(attendance);
+  }
 
-        function removeError(element) {
-            element.classList.remove('error-input');
-            const errorMsg = element.parentNode.querySelector('.error-message');
-            if (errorMsg) {
-                errorMsg.parentNode.removeChild(errorMsg);
-            }
-        }
+  // Events validation
+  const events = form.querySelector('#events');
+  if (events.value === '') {
+    highlightError(events, 'Please select which events you will attend');
+    isValid = false;
+  } else {
+    removeError(events);
+  }
 
-        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
-            e.preventDefault(); 
-            
-            // Validate form before submission
-            if (!validateForm()) {
-                return false;
-            }
-            
-            // Submit form if valid
-            const form = this;
-            const formData = new FormData(form);
-            const formAction = form.getAttribute('action');
-            
-            fetch(formAction, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    window.location.href = 'thank-you.html';
-                } else {
-                    response.json().then(data => {
-                        if (data.errors) {
-                            alert(`Form submission error: ${data.errors.map(error => error.message).join(', ')}`);
-                        } else {
-                            alert('Oops! There was a problem submitting your form.');
-                        }
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Network error occurred. Please try again.');
-            });
-        });
+  return isValid;
+}
 
-        // Clear errors when user starts typing
-        const formInputs = document.querySelectorAll('#rsvpForm input, #rsvpForm select');
-        formInputs.forEach(input => {
-            input.addEventListener('change', function() {
-                removeError(this);
-            });
-        });
+// Error handling functions (keep these the same)
+function highlightError(element, message) {
+  removeError(element);
+  element.classList.add('error-input');
+  const errorMsg = document.createElement('div');
+  errorMsg.className = 'error-message';
+  errorMsg.innerText = message;
+  errorMsg.style.color = 'red';
+  errorMsg.style.fontSize = '0.8rem';
+  errorMsg.style.marginTop = '5px';
+  element.parentNode.insertBefore(errorMsg, element.nextSibling);
+}
+
+function removeError(element) {
+  element.classList.remove('error-input');
+  const errorMsg = element.parentNode.querySelector('.error-message');
+  if (errorMsg) {
+    errorMsg.parentNode.removeChild(errorMsg);
+  }
+}
+
+// EmailJS Form Submission
+document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  if (!validateForm()) {
+    return false;
+  }
+
+  // Get form data
+  const form = this;
+  const formData = {
+    name: form.querySelector('#from_name').value,
+    email: form.querySelector('#from_email').value,
+    phone: form.querySelector('#phone').value,
+    attendance: form.querySelector('#attendance').value,
+    guests: form.querySelector('#guests').value,
+    events: form.querySelector('#events').value,
+    message: form.querySelector('#message').value
+  };
+
+  // Send email using EmailJS
+  emailjs.send('service_3n1qt47', 'template_n3oto6y', formData)
+    .then(function(response) {
+      console.log('SUCCESS!', response.status, response.text);
+      window.location.href = 'thank-you.html';
+    }, function(error) {
+      console.log('FAILED...', error);
+      alert('Oops! There was a problem submitting your form. Please try again.');
+    });
+});
+
+// Keep the rest of your existing JavaScript (event listeners, etc.)
+const formInputs = document.querySelectorAll('#rsvpForm input, #rsvpForm select');
+formInputs.forEach(input => {
+  input.addEventListener('change', function() {
+    removeError(this);
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const flipCards = document.querySelectorAll('.flip-card');
+  flipCards.forEach(card => {
+    card.addEventListener('click', function() {
+      if (window.innerWidth <= 768) {
+        this.classList.toggle('active');
+      }
+    });
+  });
+});
+        
     </script>
 </body>
 </html>
+
